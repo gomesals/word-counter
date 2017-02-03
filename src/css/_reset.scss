@@ -1,4 +1,5 @@
-// Remove comments to always on bottom footer
+// Remove comments to make always on bottom footer
+// $footerSize:		60px;
 * {
 	margin: 0;
 	padding: 0;
@@ -10,7 +11,7 @@
 // }
 
 body {
-	// margin-bottom: 60px;
+	// margin-bottom: $footerSize;
 	font-size: 100%;
 	// &>.container {
 		// padding: 0 15px;
@@ -21,7 +22,7 @@ body {
 // 	position: absolute;
 // 	bottom: 0;
 // 	width: 100%;
-// 	height: 60px;
+// 	height: $footerSize;
 // 	&>.container {
 // 		padding-right: 15px;
 // 		padding-left: 15px
@@ -29,11 +30,11 @@ body {
 // }
 
 @media (max-width: $screen-xs-max) {
-	body {
-		>.container {
+	// body {
+		// >.container {
 			// margin-bottom: 140px !important;
-		}
-	}
+		// }
+	// }
 }
 @media screen and (max-width: $screen-sm-min) {
 	body{
