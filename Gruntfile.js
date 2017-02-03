@@ -6,7 +6,8 @@ module.exports = grunt => {
 				files: ['src/css/*.scss'],
 				tasks: ['sass:dist'],
 				options: {
-					spawn: false
+					spawn: false,
+					livereload: true
 				}
 			},
 			scssVendors: {
@@ -20,7 +21,8 @@ module.exports = grunt => {
 				files: ['src/js/*.js'],
 				tasks: ['babel'],
 				options: {
-					spawn: false
+					spawn: false,
+					livereload: true
 				}
 			},
 			imgs: {
@@ -34,7 +36,8 @@ module.exports = grunt => {
 				files: ['src/view/*.pug'],
 				tasks: ['pug'],
 				options: {
-					spawn: false
+					spawn: false,
+					livereload: true
 				}
 			}
 		},
@@ -91,20 +94,6 @@ module.exports = grunt => {
 				}]
 			}
 		},
-		// uglify: {
-		// 	js: {
-		// 		options: {
-		// 			sourceMap: true
-		// 		},
-		// 		files: [{
-		// 			expand: true,
-		// 			cwd: 'src/js',
-		// 			src: '*.js',
-		// 			dest: 'dist/js',
-		// 			ext: '.js',
-		// 		}]
-		// 	}
-		// },
 		imagemin: {
 			dynamic: {
 				files: [{
