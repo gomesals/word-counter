@@ -1,19 +1,43 @@
-@mixin appTransition($time, $property, $type: linear) {
-    -moz-transition: all $time $type;
-    -moz-transition-property: $property;
-    -webkit-transition: all $time $type;
-    -webkit-transition-property: $property;
-    -o-transition: all $time $type;
-    -o-transition-property: $property;
-    transition: all $time $type;
-    transition-property: $property;
+@mixin transition($property, $time: 300ms, $type: linear) {
+	-webkit-transition: all $time $type;
+	   -moz-transition: all $time $type;
+		 -o-transition: all $time $type;
+			transition: all $time $type;
+	-webkit-transition-property: $property;
+	   -moz-transition-property: $property;
+		 -o-transition-property: $property;
+			transition-property: $property;
 }
-@mixin boxShadow($what, $what2) {
-    $box: $what, $what2;
-    @if $what2==true {
-        $box: none !important;
-    }
-    -webkit-box-shadow: $box;
-    -moz-box-shadow: $box;
-    box-shadow: $box;
+@mixin borderRadius($radius){
+	-webkit-border-radius: $radius;
+	   -moz-border-radius: $radius;
+		-ms-border-radius: $radius;
+			border-radius: $radius;
+}
+@mixin boxShadow($level, $transition: false){
+	$shadowH: (
+		level0: none,
+		level1: 0 1px 1.5px 0 rgba(0, 0, 0, .12),
+		level2: 0 2px 5px 0 rgba(0, 0, 0, .16),
+		level3: 0 10px 10px 0 rgba(0, 0, 0, .19),
+		level4: 0 14px 14px 0 rgba(0, 0, 0, .25),
+		level5: 0 19px 19px 0 rgba(0, 0, 0, .3)
+	);
+	$shadowV: (
+		level0: none,
+		level1: 0 1px 1px 0 rgba(0, 0, 0, .24),
+		level2: 0 2px 5px 0 rgba(0, 0, 0, .23),
+		level3: 0 6px 3px 0 rgba(0, 0, 0, .23),
+		level4: 0 10px 5px 0 rgba(0, 0, 0, .22),
+		level5: 0 15px 6px 0 rgba(0, 0, 0, .22)
+	);
+	-webkit-box-shadow: map-get($shadowH, level#{$level}), map-get($shadowV, level#{$level});
+	   -moz-box-shadow: map-get($shadowH, level#{$level}), map-get($shadowV, level#{$level});
+			box-shadow: map-get($shadowH, level#{$level}), map-get($shadowV, level#{$level});
+	@if $transition{
+		@include transition(all, 300ms, cubic-bezier(.25, .8, .25, 1));
+		&:hover{
+			@include boxShadow($level+1);
+		}
+	}
 }
