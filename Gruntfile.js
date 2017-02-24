@@ -4,7 +4,7 @@ module.exports = grunt => {
 		watch: {
 			scss: {
 				files: ['public_src/css/*.scss'],
-				tasks: ['sass:public'],
+				tasks: ['sass:dist'],
 				options: {
 					spawn: false,
 					livereload: true
