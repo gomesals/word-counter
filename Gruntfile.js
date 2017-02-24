@@ -1,24 +1,24 @@
-module.exports = grunt => {
+module.exports = function grunt() {
 	require('load-grunt-tasks')(grunt);
 	grunt.initConfig({
 		watch: {
 			scss: {
-				files: ['src/css/*.scss'],
-				tasks: ['sass:dist'],
+				files: ['public_src/css/*.scss'],
+				tasks: ['sass:public'],
 				options: {
 					spawn: false,
 					livereload: true
 				}
 			},
 			scssVendors: {
-				files: ['src/css/vendors/*.scss'],
+				files: ['public_src/css/vendors/*.scss'],
 				tasks: ['sass:vendors'],
 				options: {
 					spawn: false
 				}
 			},
 			js: {
-				files: ['src/js/*.js'],
+				files: ['public_src/js/*.js'],
 				tasks: ['babel'],
 				options: {
 					spawn: false,
@@ -26,14 +26,14 @@ module.exports = grunt => {
 				}
 			},
 			imgs: {
-				files: ['src/imgs/*.{png,jpg,gif}'],
+				files: ['public_src/imgs/*.{png,jpg,gif}'],
 				tasks: ['imagemin'],
 				options: {
 					spawn: false
 				}
 			},
 			pug: {
-				files: ['src/view/*.pug'],
+				files: ['public_src/view/*.pug'],
 				tasks: ['pug'],
 				options: {
 					spawn: false,
@@ -45,9 +45,9 @@ module.exports = grunt => {
 			compile: {
 				files: [{
 					expand: true,
-					cwd: 'src/view',
+					cwd: 'public_src/view',
 					src: ['*.pug'],
-					dest: 'dist/',
+					dest: 'public/',
 					ext: '.html',
 				}],
 			}
@@ -60,18 +60,18 @@ module.exports = grunt => {
 			dist: {
 				files: [{
 					expand: true,
-					cwd: 'src/css',
+					cwd: 'public_src/css',
 					src: ['*.scss'],
-					dest: 'dist/css',
+					dest: 'public/css',
 					ext: '.css',
 				}],
 			},
 			vendors: {
 				files: [{
 					expand: true,
-					cwd: 'src/css/vendors',
+					cwd: 'public_src/css/vendors',
 					src: ['*.scss'],
-					dest: 'dist/css/vendors',
+					dest: 'public/css/vendors',
 					ext: '.css',
 				}],
 			}
@@ -87,9 +87,9 @@ module.exports = grunt => {
 			dist: {
 				files: [{
 					expand: true,
-					cwd: 'src/js',
+					cwd: 'public_src/js',
 					src: '*.js',
-					dest: 'dist/js',
+					dest: 'public/js',
 					ext: '.js',
 				}]
 			}
@@ -98,9 +98,9 @@ module.exports = grunt => {
 			dynamic: {
 				files: [{
 					expand: true,
-					cwd: 'src/images/',
+					cwd: 'public_src/images/',
 					src: ['**/*.{png,jpg,gif}'],
-					dest: 'dist/images/'
+					dest: 'public/images/'
 				}]
 			}
 		},
@@ -108,17 +108,17 @@ module.exports = grunt => {
 			fonts: {
 				files: [{
 					expand: true,
-					cwd: 'src/fonts',
+					cwd: 'public_src/fonts',
 					src: ['**/*'],
-					dest: 'dist/fonts'
+					dest: 'public/fonts'
 				}]
 			},
 			main: {
 				files: [{
 					expand: true,
-					cwd: 'src/main',
+					cwd: 'public_src/main',
 					src: ['*.*'],
-					dest: 'dist'
+					dest: 'public'
 				}],
 			},
 		},
