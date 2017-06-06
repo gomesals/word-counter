@@ -2,23 +2,16 @@ module.exports = grunt => {
 	require('load-grunt-tasks')(grunt);
 	grunt.initConfig({
 		watch: {
-			scss: {
-				files: ['public_src/css/*.scss'],
-				tasks: ['sass:dist'],
+			css: {
+				files: ['src/css/*.scss'],
+				tasks: ['newer:postcss'],
 				options: {
 					spawn: false,
 					livereload: true
 				}
 			},
-			scssVendors: {
-				files: ['public_src/css/vendors/*.scss'],
-				tasks: ['sass:vendors'],
-				options: {
-					spawn: false
-				}
-			},
 			js: {
-				files: ['public_src/js/*.js'],
+				files: ['src/js/*.js'],
 				tasks: ['babel'],
 				options: {
 					spawn: false,
@@ -26,14 +19,14 @@ module.exports = grunt => {
 				}
 			},
 			imgs: {
-				files: ['public_src/imgs/*.{png,jpg,gif}'],
+				files: ['src/images/*.{png,jpg,gif}'],
 				tasks: ['imagemin'],
 				options: {
 					spawn: false
 				}
 			},
 			pug: {
-				files: ['public_src/view/*.pug'],
+				files: ['src/view/*.pug'],
 				tasks: ['pug'],
 				options: {
 					spawn: false,
@@ -41,38 +34,41 @@ module.exports = grunt => {
 				}
 			}
 		},
-		pug: {
-			compile: {
-				files: [{
-					expand: true,
-					cwd: 'public_src/view',
-					src: ['*.pug'],
-					dest: 'public/',
-					ext: '.html',
-				}],
-			}
-		},
-		sass: {
+		postcss: {
 			options: {
-				sourceMap: true,
-				outputStyle: 'compressed'
+				map: {
+					inline: false,
+					dist: 'dist/css/map/'
+				},
+				parser: require('postcss-scss'),
+				processors: [
+					require('precss')(),
+					require('postcss-cssnext')({
+						warnForDuplicates: false
+					}),
+					require('cssnano')(),
+					require('lost')(),
+					require('postcss-strip-inline-comments')()
+				],
 			},
 			dist: {
 				files: [{
 					expand: true,
-					cwd: 'public_src/css',
+					cwd: 'src/css/',
 					src: ['*.scss'],
-					dest: 'public/css',
+					dest: 'dist/css',
 					ext: '.css',
 				}],
-			},
-			vendors: {
+			}
+		},
+		pug: {
+			compile: {
 				files: [{
 					expand: true,
-					cwd: 'public_src/css/vendors',
-					src: ['*.scss'],
-					dest: 'public/css/vendors',
-					ext: '.css',
+					cwd: 'src/view',
+					src: ['*.pug'],
+					dest: 'dist/',
+					ext: '.html',
 				}],
 			}
 		},
@@ -87,9 +83,9 @@ module.exports = grunt => {
 			dist: {
 				files: [{
 					expand: true,
-					cwd: 'public_src/js',
+					cwd: 'src/js',
 					src: '*.js',
-					dest: 'public/js',
+					dest: 'dist/js',
 					ext: '.js',
 				}]
 			}
@@ -98,9 +94,9 @@ module.exports = grunt => {
 			dynamic: {
 				files: [{
 					expand: true,
-					cwd: 'public_src/images/',
+					cwd: 'src/images/',
 					src: ['**/*.{png,jpg,gif}'],
-					dest: 'public/images/'
+					dest: 'dist/images/'
 				}]
 			}
 		},
@@ -108,22 +104,22 @@ module.exports = grunt => {
 			fonts: {
 				files: [{
 					expand: true,
-					cwd: 'public_src/fonts',
+					cwd: 'src/fonts',
 					src: ['**/*'],
-					dest: 'public/fonts'
+					dest: 'dist/fonts'
 				}]
 			},
 			main: {
 				files: [{
 					expand: true,
-					cwd: 'public_src/main',
+					cwd: 'src/main',
 					src: ['*.*'],
-					dest: 'public'
+					dest: 'dist'
 				}],
 			},
 		},
 	});
 	grunt.registerTask('default', ['watch']);
-	grunt.registerTask('build', ['imagemin', 'pug', 'babel', 'sass', 'copy']);
-	grunt.registerTask('init', ['imagemin', 'pug', 'babel', 'sass', 'copy']);
+	grunt.registerTask('build', ['imagemin', 'pug', 'babel', 'postcss', 'copy']);
+	grunt.registerTask('init', ['imagemin', 'pug', 'babel', 'postcss', 'copy']);
 };
