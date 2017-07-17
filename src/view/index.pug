@@ -3,8 +3,19 @@ html(lang="pt-br")
 	head
 		include default/header.pug
 		link(rel="stylesheet" href="css/app.css" media="all")
-		title Default
+		title Contador de palavras
 	body
-		h1 Ola
-		//- script(src="js/app.js" defer)
-		script(src="//192.168.0.100:35729/livereload.js")
+		h1 Contador de Palavras
+		textarea#words(placeholder="Texto")
+		ul
+			li
+				span.bold Palavras
+				span#count-words.info 0
+			li
+				span.bold Caracteres sem espaço
+				span#count-chars--no-spaces.info 0
+			li
+				span.bold Caracteres com espaço
+				span#count-chars--spaces.info 0
+		script(src="js/app.js" defer)
+		//- script(src="//192.168.0.100:35729/livereload.js")

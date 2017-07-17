@@ -1,0 +1,42 @@
+@import "lib/_default.scss";
+body{
+	margin-top: 3em;
+}
+h1{
+	font-weight: 300;
+	text-align: center;
+margin-bottom: 2em;
+}
+textarea{
+	height: 300px;
+	width: 80%;
+	margin: 0 10%;
+	padding: 1em;
+	border-radius: 4px;
+	transition: border-color 150ms linear;
+	border: 1px solid $gray;
+	resize: none;
+	margin-bottom: 2em;
+	&:hover{
+		border-color: color($gray shade(15%));
+	}
+	&:active, &:focus{
+		outline: none;
+		border-color: $accent;
+	}
+}
+ul{
+	list-style: none;
+	text-align: center;
+	li{
+		display: inline-block;
+		margin-right: 2em;
+		span{
+			&.bold{
+				margin-right: .5em;
+				font-weight: bold;
+			}
+			&.info{}
+		}
+	}
+}
