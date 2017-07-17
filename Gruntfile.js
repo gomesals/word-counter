@@ -18,13 +18,6 @@ module.exports = grunt => {
 					livereload: true
 				}
 			},
-			imgs: {
-				files: ['src/images/*.{png,jpg,gif}'],
-				tasks: ['imagemin'],
-				options: {
-					spawn: false
-				}
-			},
 			pug: {
 				files: ['src/view/*.pug'],
 				tasks: ['pug'],
@@ -89,37 +82,8 @@ module.exports = grunt => {
 					ext: '.js',
 				}]
 			}
-		},
-		imagemin: {
-			dynamic: {
-				files: [{
-					expand: true,
-					cwd: 'src/images/',
-					src: ['**/*.{png,jpg,gif}'],
-					dest: 'dist/images/'
-				}]
-			}
-		},
-		copy: {
-			fonts: {
-				files: [{
-					expand: true,
-					cwd: 'src/fonts',
-					src: ['**/*'],
-					dest: 'dist/fonts'
-				}]
-			},
-			main: {
-				files: [{
-					expand: true,
-					cwd: 'src/main',
-					src: ['*.*'],
-					dest: 'dist'
-				}],
-			},
-		},
+		}
 	});
 	grunt.registerTask('default', ['watch']);
-	grunt.registerTask('build', ['imagemin', 'pug', 'babel', 'postcss', 'copy']);
-	grunt.registerTask('init', ['imagemin', 'pug', 'babel', 'postcss', 'copy']);
+	grunt.registerTask('build', ['pug', 'babel', 'postcss']);
 };

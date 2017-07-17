@@ -18,7 +18,6 @@
 		"grunt-newer": "^1.2.0",
 		"grunt-postcss": "^0.8.0",
 		"load-grunt-tasks": "^3.5.2",
-		"lost": "^8.0.0",
 		"postcss-cssnext": "^2.10.0",
 		"postcss-scss": "^0.4.1",
 		"postcss-strip-inline-comments": "^0.1.5",
