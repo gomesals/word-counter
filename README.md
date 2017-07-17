@@ -1,1 +1,2 @@
-// TODO: Readme
+# word-counter
+Simple word counter
